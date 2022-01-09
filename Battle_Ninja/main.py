@@ -13,7 +13,21 @@ pygame.display.set_caption("PlaceHolder")
 
 clock = pygame.time.Clock()
 
-window.fill((0,0,0)) 
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+RED = (255, 50, 50)
+GREEN = (50, 255, 50)
+
+CIRCLE_RADIUS = 10
+
+x = 350
+y = 350
+
+window.fill(WHITE)
+
+def render():
+    window.fill(WHITE)
+    pygame.draw.circle(window, RED, [x, y], CIRCLE_RADIUS, 0)
 
 
 def start():
@@ -30,23 +44,29 @@ def start():
             if event.type == pygame.QUIT:
                 run = False
 
+            render()
+            
             if event.type == KEYDOWN:
 
                 if event.key == pygame.K_w:
                     up = True
                     print("w")
+                    y -= 3
 
                 if event.key == pygame.K_s:
                     down = True
                     print("s")
+                    y += 3
 
                 if event.key == pygame.K_a:
                     left = True
                     print("a")
+                    x -= 3
 
                 if event.key == pygame.K_d:
                     right = True
                     print("d")
+                    x += 3
 
                 if event.key == pygame.K_SPACE:
                     shoot = True
@@ -99,9 +119,3 @@ def start():
         clock.tick(fps)
 
     pygame.quit()
-
-
-
-
-
-start()
