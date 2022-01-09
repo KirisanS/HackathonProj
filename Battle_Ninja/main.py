@@ -5,7 +5,7 @@ pygame.init()
 
 width = 700
 
-fps = 30
+fps = 60
 
 window = pygame.display.set_mode((width,width))
 
@@ -30,6 +30,30 @@ def render():
     pygame.draw.circle(window, RED, [x, y], CIRCLE_RADIUS, 0)
 
 
+
+class Button():
+  def __init__(self, x,y, image):
+    self.image = image
+    self.rect = self.image.get_rect()
+    self.rect.topleft = (x,y)
+
+  
+  def draw(self):
+    action = False
+    pos = pygame.mouse.get_pos()
+    if self.rect.collidepoint(pos):
+      if pygame.mouse.get_pressed()[0] == 1:
+        action = True
+    window.blit(self.image, (self.rect.x, self.rect.y))
+
+    return action
+
+startImg = pygame.image.load('start.png').convert_alpha()
+optionsImg = pygame.image.load('options.png').convert_alpha()
+
+startButton = Button(265, 100, startImg)
+optionsButton = Button(257, 150, optionsImg)
+
 def start():
     run = True
 
@@ -38,15 +62,23 @@ def start():
 
     while run:
         
+        if startButton.draw() == True:
+          print("Start the game")
 
+
+  
+
+
+        
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
                 run = False
 
             render()
-            
             if event.type == KEYDOWN:
+                y = 0
+                x = 0
 
                 if event.key == pygame.K_w:
                     up = True
@@ -119,3 +151,5 @@ def start():
         clock.tick(fps)
 
     pygame.quit()
+
+start()
