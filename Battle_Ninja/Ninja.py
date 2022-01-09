@@ -4,7 +4,7 @@ import pygame
 IMAGE = pygame.image.load()
 
 class Ninja(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = IMAGE
         self.rect = self.image.get_rect()
